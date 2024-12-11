@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile Manager</title>
+  </head>
+  <body>
+    <h1>User Profile</h1>
+    <div id="profile">
+      <!-- Profile details will be displayed here -->
+    </div>
+
+    <button id="updateBtn">Update Profile</button>
+    <button id="deleteBtn">Delete Profile</button>
+
+    <script>
+      const profile = document.getElementById("profile");
+      // 1. User Profile Object
+      const userProfile = {
+        username: "john_doe",
+        email: "john@example.com",
+        age: 25,
+        isAdmin: false,
+      };
+      displayProfile();
+
+      // 2. Regular function to display the profile
+      function displayProfile() {
+        profile.innerHTML = "";
+        userProfile.username == null && userProfile.email == null && userProfile.age == null && userProfile.isAdmin == null
+          ? (profile.innerHTML += `<p>Profile Deleted</p>`)
+          : (profile.innerHTML += `<p>Name: ${userProfile.username}</p><p>Email: ${userProfile.email}</p><p>Age: ${userProfile.age}</p><p>Is Admin: ${
+              userProfile.isAdmin ? "Yes" : "No"
+            }</p>`);
+      }
+
+      // 3. Arrow function to update the profile
+
+      const updateProfile = (newData) => {
+        userProfile.username = newData.name;
+        userProfile.email = newData.email;
+        userProfile.age = newData.age;
+        userProfile.isAdmin = newData.admin === "yes" ? true : false;
+
+        displayProfile();
+      };
+
+      // 4. Event listener for updating the profile
+      document.getElementById("updateBtn").addEventListener("click", () => {
+        const name = prompt("Enter name: ", "john_doe");
+        const email = prompt("Enter email: ", "john@example.com");
+        const age = prompt("Enter age: ", "20");
+        const admin = prompt("Are you Admin: Enter 'yes' if you are!", "no");
+
+        updateProfile({ name: name, email: email, age: age, admin: admin });
+      });
+
+      // 5. Event listener for deleting the profile
+
+      document.getElementById("deleteBtn").addEventListener("click", function () {
+        userProfile.username = null;
+        userProfile.email = null;
+        userProfile.age = null;
+        userProfile.isAdmin = null;
+
+        displayProfile();
+      });
+
+      // Initialize by displaying the profile
+    </script>
+  </body>
+</html>
